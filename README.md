@@ -1,6 +1,6 @@
 # Book Explorer
 
-A production-quality content explorer built on **Next.js 15 (App Router)**, **TypeScript strict**, and **Tailwind CSS**. Data is sourced from the [Open Library](https://openlibrary.org) API — no API key required.
+A small book discovery app built with **Next.js 15 (App Router)**, **TypeScript strict**, and **Tailwind CSS**. It pulls data from the [Open Library](https://openlibrary.org) API and requires no API key.
 
 ## Live URL
 
@@ -17,6 +17,10 @@ cp .env.example .env.local
 npm install
 npm run dev
 ```
+
+### Environment variables
+
+If you want to override the default Open Library endpoints, copy `.env.example` to `.env.local` and update the values there. Otherwise the app will use the public Open Library URLs by default.
 
 Open http://localhost:3000. Tests: `npm run test:run`.
 
@@ -59,7 +63,7 @@ src/
 
 ### Why Vercel over Cloudflare Workers?
 
-Vercel's native Next.js integration is zero-config and avoids the OpenNext adapter's edge-case runtime differences (streaming, middleware, ISR). The Cloudflare edge caching strategy from B-1 is documented and implemented in the API route — the headers would work identically behind a Cloudflare proxy in front of Vercel.
+Vercel is the most straightforward deployment option for this Next.js app, so I chose it for the assessment. The edge caching strategy in `src/app/api/books/route.ts` is still documented and would apply behind a Cloudflare proxy as well.
 
 ### Data fetching strategy
 
@@ -183,4 +187,3 @@ Target score: ≥ 95 Lighthouse accessibility.
 2. **Reading list** — Zustand store persisted to `localStorage` so users can save books across sessions
 3. **Cloudflare Workers deployment** — wire up OpenNext adapter and implement true `caches.default.match/put` edge caching with the `x-cache-status: HIT` header from the Worker itself
 
-# frontend-assessment-james-okafor

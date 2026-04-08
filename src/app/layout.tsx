@@ -62,9 +62,6 @@ export default function RootLayout({
               >
                 Book Explorer
               </a>
-              <span className="ml-auto text-xs text-slate-400 hidden sm:block">
-                Powered by Open Library
-              </span>
             </div>
           </div>
         </header>

@@ -10,6 +10,8 @@ import type {
   PAGE_SIZE,
 } from "@/types/book";
 
+// Runtime configuration can be overridden locally via `.env.local`.
+// Next.js automatically loads `NEXT_PUBLIC_*` values into the client and server.
 const BASE_URL =
   process.env.NEXT_PUBLIC_OL_BASE_URL ?? "https://openlibrary.org";
 const COVERS_URL =
