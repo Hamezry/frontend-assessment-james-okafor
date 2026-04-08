@@ -4,7 +4,7 @@ A small book discovery app built with **Next.js 15 (App Router)**, **TypeScript 
 
 ## Live URL
 
-> [Add V
+> https://frontend-assessment-james-okafor.vercel.app/
 
 ---
 
@@ -186,4 +186,6 @@ Target score: ≥ 95 Lighthouse accessibility.
 1. **MSW-based integration tests** — mock the OpenLibrary API at the network layer and test the full search + filter + pagination flow
 2. **Reading list** — Zustand store persisted to `localStorage` so users can save books across sessions
 3. **Cloudflare Workers deployment** — wire up OpenNext adapter and implement true `caches.default.match/put` edge caching with the `x-cache-status: HIT` header from the Worker itself
+
+# frontend-assessment-james-okafor
 
