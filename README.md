@@ -4,7 +4,7 @@ A small book discovery app built with **Next.js 15 (App Router)**, **TypeScript 
 
 ## Live URL
 
-> [Add Vercel deployment URL here after deployment]
+> [Add V
 
 ---
 
