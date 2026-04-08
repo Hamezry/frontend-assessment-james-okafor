@@ -183,3 +183,4 @@ Target score: ≥ 95 Lighthouse accessibility.
 2. **Reading list** — Zustand store persisted to `localStorage` so users can save books across sessions
 3. **Cloudflare Workers deployment** — wire up OpenNext adapter and implement true `caches.default.match/put` edge caching with the `x-cache-status: HIT` header from the Worker itself
 
+# frontend-assessment-james-okafor
