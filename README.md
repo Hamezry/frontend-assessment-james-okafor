@@ -4,15 +4,15 @@ A production-quality content explorer built on **Next.js 15 (App Router)**, **Ty
 
 ## Live URL
 
-> https://book-explorer-[your-name].vercel.app ← replace after deployment
+> [Add Vercel deployment URL here after deployment]
 
 ---
 
 ## Quick Start
 
 ```bash
-git clone https://github.com/[your-name]/frontend-assessment-[your-name].git
-cd frontend-assessment-[your-name]
+git clone https://github.com/Hamezry/frontend-assessment-james-okafor.git
+cd frontend-assessment-james-okafor
 cp .env.example .env.local
 npm install
 npm run dev
@@ -75,11 +75,11 @@ Every `<Image>` has explicit `width`/`height` or `fill` with `sizes`, preventing
 
 ### 2. Next.js fetch cache settings
 
-| Call | Cache setting | Reason |
-|---|---|---|
-| `searchBooks` | `revalidate: 3600` | Search results change over hours, not seconds. 1 h is fresh enough while avoiding a network hit on every page view. |
-| `getWorkBasic` | `revalidate: 86400` | Works (books) are immutable in practice. 24 h cache avoids redundant requests on repeated visits. |
-| `getWorkAuthors` | `revalidate: 86400` | Same reasoning as works. |
+| Call             | Cache setting       | Reason                                                                                                              |
+| ---------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `searchBooks`    | `revalidate: 3600`  | Search results change over hours, not seconds. 1 h is fresh enough while avoiding a network hit on every page view. |
+| `getWorkBasic`   | `revalidate: 86400` | Works (books) are immutable in practice. 24 h cache avoids redundant requests on repeated visits.                   |
+| `getWorkAuthors` | `revalidate: 86400` | Same reasoning as works.                                                                                            |
 
 ### 3. Font optimization via `next/font`
 
@@ -120,12 +120,12 @@ curl -I https://<your-deployment>/api/books?q=fiction
 
 If the project were deployed on Cloudflare Workers via OpenNext:
 
-| Next.js fetch option | OpenNext/Workers behaviour |
-|---|---|
-| `revalidate: N` | OpenNext sets `Cache-Control: s-maxage=N` on the sub-request; Workers honors this via `cf.cacheTtl` |
-| `force-cache` | OpenNext passes `cf: { cacheEverything: true }` on internal fetches |
-| `no-store` | Workers `Cache-Control: no-store` bypass |
-| `x-cache-status` | You would check `caches.default.match(request)` in the Worker, return `HIT` if found, otherwise call the origin and `caches.default.put` the response |
+| Next.js fetch option | OpenNext/Workers behaviour                                                                                                                            |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `revalidate: N`      | OpenNext sets `Cache-Control: s-maxage=N` on the sub-request; Workers honors this via `cf.cacheTtl`                                                   |
+| `force-cache`        | OpenNext passes `cf: { cacheEverything: true }` on internal fetches                                                                                   |
+| `no-store`           | Workers `Cache-Control: no-store` bypass                                                                                                              |
+| `x-cache-status`     | You would check `caches.default.match(request)` in the Worker, return `HIT` if found, otherwise call the origin and `caches.default.put` the response |
 
 ### B-2 — React 18 Streaming with Suspense
 
@@ -166,14 +166,14 @@ Target score: ≥ 95 Lighthouse accessibility.
 
 ## Trade-offs & Known Limitations
 
-| Area | Decision | What I'd do with more time |
-|---|---|---|
-| State management | `useState` + URL params only | For a real app with shopping cart / reading list, add Zustand |
-| Error granularity | Single `error.tsx` per segment | Add typed error classes to distinguish 404 vs 500 vs network timeout |
-| Testing | 2 components at 100% coverage | Add integration tests with MSW to mock OpenLibrary API |
-| Search | Delegates to OpenLibrary's full-text search | Build a local Fuse.js index for instant client-side search on cached results |
-| Cloudflare | Headers only, no actual Workers deployment | Full OpenNext Cloudflare adapter setup with `caches.default` reads |
-| Cover images | OpenLibrary covers can be missing for many books | Cross-reference Google Books API as fallback cover source |
+| Area              | Decision                                         | What I'd do with more time                                                   |
+| ----------------- | ------------------------------------------------ | ---------------------------------------------------------------------------- |
+| State management  | `useState` + URL params only                     | For a real app with shopping cart / reading list, add Zustand                |
+| Error granularity | Single `error.tsx` per segment                   | Add typed error classes to distinguish 404 vs 500 vs network timeout         |
+| Testing           | 2 components at 100% coverage                    | Add integration tests with MSW to mock OpenLibrary API                       |
+| Search            | Delegates to OpenLibrary's full-text search      | Build a local Fuse.js index for instant client-side search on cached results |
+| Cloudflare        | Headers only, no actual Workers deployment       | Full OpenNext Cloudflare adapter setup with `caches.default` reads           |
+| Cover images      | OpenLibrary covers can be missing for many books | Cross-reference Google Books API as fallback cover source                    |
 
 ---
 
@@ -182,3 +182,4 @@ Target score: ≥ 95 Lighthouse accessibility.
 1. **MSW-based integration tests** — mock the OpenLibrary API at the network layer and test the full search + filter + pagination flow
 2. **Reading list** — Zustand store persisted to `localStorage` so users can save books across sessions
 3. **Cloudflare Workers deployment** — wire up OpenNext adapter and implement true `caches.default.match/put` edge caching with the `x-cache-status: HIT` header from the Worker itself
+
