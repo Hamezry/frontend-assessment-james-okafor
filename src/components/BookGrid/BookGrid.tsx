@@ -1,14 +1,10 @@
-import BookCard from '@/components/BookCard/BookCard';
-import type { BookCardData } from '@/types/book';
+import BookCard from "@/components/BookCard/BookCard";
+import type { BookCardData } from "@/types/book";
 
 interface BookGridProps {
   books: BookCardData[];
 }
 
-/**
- * Responsive grid: 1 col mobile → 2 col tablet → 3 col desktop → 4 col xl.
- * First 8 cards get priority on LCP images since they are above-the-fold on most viewports.
- */
 export default function BookGrid({ books }: BookGridProps) {
   return (
     <section aria-label="Book results">
@@ -25,3 +21,4 @@ export default function BookGrid({ books }: BookGridProps) {
     </section>
   );
 }
+

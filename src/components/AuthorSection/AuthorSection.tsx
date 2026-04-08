@@ -1,21 +1,14 @@
-import Image from 'next/image';
-import { getWorkAuthors } from '@/lib/api/openlibrary';
-import type { AuthorData } from '@/types/book';
+import Image from "next/image";
+import { getWorkAuthors } from "@/lib/api/openlibrary";
+import type { AuthorData } from "@/types/book";
 
 interface AuthorSectionProps {
   authorKeys: string[];
 }
 
-/**
- * B-2: This is a Server Component intentionally separated from the main
- * page fetch so it can be wrapped in a <Suspense> boundary.
- *
- * The parent (book detail page) streams in immediately with the work's
- * title, cover, and description. Meanwhile this component awaits the
- * author API calls. The Suspense fallback (AuthorSectionSkeleton) is
- * shown until this resolves — no client-side loading state needed.
- */
-export default async function AuthorSection({ authorKeys }: AuthorSectionProps) {
+export default async function AuthorSection({
+  authorKeys,
+}: AuthorSectionProps) {
   if (authorKeys.length === 0) return null;
 
   const authors = await getWorkAuthors(authorKeys);
@@ -23,8 +16,11 @@ export default async function AuthorSection({ authorKeys }: AuthorSectionProps) 
 
   return (
     <section aria-labelledby="authors-heading">
-      <h2 id="authors-heading" className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-3">
-        {authors.length === 1 ? 'Author' : 'Authors'}
+      <h2
+        id="authors-heading"
+        className="text-sm font-semibold text-slate-500 uppercase tracking-wide mb-3"
+      >
+        {authors.length === 1 ? "Author" : "Authors"}
       </h2>
       <div className="flex flex-col gap-4">
         {authors.map((author) => (
@@ -55,11 +51,14 @@ function AuthorCard({ author }: { author: AuthorData }) {
 
       {/* Author info */}
       <div className="min-w-0">
-        <p className="font-semibold text-slate-900 text-sm leading-snug">{author.name}</p>
+        <p className="font-semibold text-slate-900 text-sm leading-snug">
+          {author.name}
+        </p>
 
         {(author.birthDate || author.deathDate) && (
           <p className="text-xs text-slate-500 mt-0.5">
-            {author.birthDate ?? '?'}{author.deathDate ? ` – ${author.deathDate}` : ''}
+            {author.birthDate ?? "?"}
+            {author.deathDate ? ` – ${author.deathDate}` : ""}
           </p>
         )}
 
@@ -84,10 +83,10 @@ function AuthorCard({ author }: { author: AuthorData }) {
 
 function InitialsAvatar({ name }: { name: string }) {
   const initials = name
-    .split(' ')
+    .split(" ")
     .slice(0, 2)
-    .map((n) => n[0]?.toUpperCase() ?? '')
-    .join('');
+    .map((n) => n[0]?.toUpperCase() ?? "")
+    .join("");
 
   return (
     <div
@@ -99,3 +98,4 @@ function InitialsAvatar({ name }: { name: string }) {
     </div>
   );
 }
+
